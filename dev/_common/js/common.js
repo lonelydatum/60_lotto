@@ -1,5 +1,6 @@
 const banner = document.getElementById('banner')
 const size = {w:banner.offsetWidth, h:banner.offsetHeight}
+const {w, h} = size
 
 gsap.defaults({
   ease: "power2.out"
@@ -7,18 +8,16 @@ gsap.defaults({
 
 
 
-const READ = {
-	t1: 3.5,
-	t2a: 2.8,
-	t2b: 2.3,
+
+
+const READ_ALL = {}
+READ_ALL["olg-bonus"] = {
+	t1: 2,
+	t2a: 3,
+	t2b: 3.8,
 }
 
-
-
-const {w, h} = size
-
-
-
+const READ = READ_ALL[window.universalBanner.name]
 
 	
 function init(){	
@@ -39,25 +38,28 @@ let data_ = {}
 function start(data){
 	
 	data_ = {manScale:true, olgY:80, ball_time:.5, ball_ease:4.5, ...data}
-	console.log(data_);
+	
 	const {manScale, olgY, ball_time, ball_ease} = data_
 	
 	const tl = init()
 	
 	if(manScale){
-		gsap.to(".man", {scale:1.07, duration:5})	
+		gsap.set(".man", {x:-size.w/2, y:-size.h/2, transformOrigin: "50% 50%"})	
+
+		gsap.from(".man", {scale:.55, duration:5})	
 	}
 	
 
+	
 
 	logo()	
 	
-	tl.from(".t1", {duration:.3, opacity:0, x:"-=100"}, "+=.75")
+	tl.from(".t1", {duration:.3, opacity:0, x:"-=100"}, "+=.4")
 	tl.add("t1", `+=${READ.t1}`)
 	tl.to([".t1", ".man"], {duration:.2, opacity:0}, "t1")
 
 	
-
+	
 	tl.add(hand(), "+=.3")
 
 
@@ -78,8 +80,11 @@ function start(data){
 
 	
 	tl.set(".frame2", {opacity:1}, "-=.8")
-	tl.from(".txt-get-started", {duration:.5, opacity:0}, "-=.8")
-	tl.from(".olg-ca", {duration:.3, opacity:0}, "+=.5")	
+	tl.from(".frame_end_logo-max", {duration:.5, opacity:0}, "-=.8")
+	tl.from(".frame_end_jackpot", {duration:.5, opacity:0}, "-=.6")
+	tl.from(".frame_end_40", {duration:.5, opacity:0}, "-=.4")
+	
+	
 	tl.from(['#EF_cta'], 0.5, {opacity:0, y:"+=20'", onComplete:mouseover}, '+=.25');
 
 	// tl.play("test")
@@ -90,14 +95,18 @@ function hand(){
 	var tl = new TimelineMax()	
 	const obj = size.w>size.h ? {y:`+=${size.h}`}: {x:`+=${size.w}`}
 
-	tl.from(".hand", {duration:.3, ...obj }, 0)
+	tl.from(".hand_1", {duration:.3, ...obj }, 0)
 	tl.from(".t2a", {duration:.4,  x:`-=${size.w}`}, 0)
 	tl.to(".t2a", {duration:.3, opacity:0, x:"+=100"}, `+=${READ.t2a}`)
-	tl.from(".t2b", {duration:.4, opacity:0, x:"-=100"})
+	
+	tl.add("t2-in")
+	tl.from(".t2b", {duration:.4, opacity:0, x:"-=100"}, "t2-in")
+	tl.from(".hand_2", {duration:.1, opacity:0 }, "t2-in")
 
 	tl.add("t2", `+=${READ.t2b}`)
 	tl.to(".t2b", {duration:.45, opacity:0, ...obj}, "t2")
 	tl.to(".hand", {duration:.35, opacity:0, ...obj}, "t2")
+	
 	return tl
 }
 
@@ -141,11 +150,13 @@ function logo(){
 
 }
 
+function scale({x, y}){
+	return {x:-x, y:-y, transformOrigin:`${x*2}px ${y*2}px`}
+}
 
 
 
-
-export {size, init, start}
+export {size, init, start, scale}
 
 
 
