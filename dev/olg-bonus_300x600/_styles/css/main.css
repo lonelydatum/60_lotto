@@ -53,9 +53,9 @@ table {
 
 #legalBtn:hover ~ #legalContent {
   opacity: 1;
-  -webkit-transform: translate(0px, 0px) scale(0.5, 0.5);
-  -ms-transform: translate(0px, 0px) scale(0.5, 0.5);
-  transform: translate(0px, 0px) scale(0.5, 0.5);
+  -webkit-transform: translate(0px, 0px) scale(1, 1);
+  -ms-transform: translate(0px, 0px) scale(1, 1);
+  transform: translate(0px, 0px) scale(1, 1);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   -webkit-perspective: 1000px;
@@ -64,9 +64,9 @@ table {
 }
 
 #legalContent {
-  -webkit-transform: translate(0px, 60px) scale(0.5, 0.5);
-  -ms-transform: translate(0px, 60px) scale(0.5, 0.5);
-  transform: translate(0px, 60px) scale(0.5, 0.5);
+  -webkit-transform: translate(0px, 30px) scale(1, 1);
+  -ms-transform: translate(0px, 30px) scale(1, 1);
+  transform: translate(0px, 30px) scale(1, 1);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   -webkit-perspective: 1000px;
@@ -98,6 +98,10 @@ table {
   z-index: 11;
   background-color: red;
   display: none;
+}
+
+.hand_1_screen_text {
+  z-index: 99;
 }
 
 /*--------------------------------------------*/

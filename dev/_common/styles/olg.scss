@@ -2,12 +2,12 @@
 
 #legalBtn:hover ~ #legalContent {
 	opacity: 1;
-	@include pos-scale(0, 0, .5);
+	@include pos-scale(0, 0, 1);
 }
 
 #legalContent{
 	
-	@include pos-scale(0, 60, .5);
+	@include pos-scale(0, 30, 1);
 	color: white;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	// padding: 10px;
@@ -32,3 +32,6 @@
 	display: none;
 }
 
+.hand_1_screen_text{
+	z-index: 99;
+}

@@ -1,9 +1,9 @@
 
 
 
-import {init, start} from '../../_common/js/common.js'
+import {init, start, scale} from '../../_common/js/common.js'
 document.getElementById("man").className = "retina man"
-gsap.set("#EF_cta", {x:-160, y:-25, transformOrigin:"320px 50px"})
+gsap.set("#EF_cta", scale({x:270, y:25}))
 start({manScale:false, olgY:70})
 
 

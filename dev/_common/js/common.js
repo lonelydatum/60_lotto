@@ -7,6 +7,7 @@ gsap.defaults({
 });
 
 
+const xy = w/h>2?"y":"x"
 
 
 
@@ -31,6 +32,20 @@ function init(){
 	return tl
 }
 
+function xyIn(){
+	const obj = {duration:.3, opacity:0}
+	obj[xy] = "-=100"
+	return obj
+}
+
+
+
+function xyOut(){
+	const obj = {duration:.3, opacity:0}
+	obj[xy] = "+=100"
+	return obj
+}
+
 
 let data_ = {}
 
@@ -38,6 +53,7 @@ let data_ = {}
 function start(data){
 	
 	data_ = {manScale:true, olgY:80, ball_time:.5, ball_ease:4.5, ...data}
+
 	
 	const {manScale, olgY, ball_time, ball_ease} = data_
 	
@@ -45,23 +61,21 @@ function start(data){
 	
 	if(manScale){
 		gsap.set(".man", {x:-size.w/2, y:-size.h/2, transformOrigin: "50% 50%"})	
-
 		gsap.from(".man", {scale:.55, duration:5})	
 	}
 	
 
 	
 
-	logo()	
+	logo()
 	
-	tl.from(".t1", {duration:.3, opacity:0, x:"-=100"}, "+=.4")
+	tl.from(".t1", xyIn() , "+=.4")
 	tl.add("t1", `+=${READ.t1}`)
 	tl.to([".t1", ".man"], {duration:.2, opacity:0}, "t1")
 
 	
 	
 	tl.add(hand(), "+=.3")
-
 
 
 	const tlHideOLG = new TimelineMax()
@@ -80,11 +94,8 @@ function start(data){
 
 	
 	tl.set(".frame2", {opacity:1}, "-=.8")
-	tl.from(".frame_end_logo-max", {duration:.5, opacity:0}, "-=.8")
-	tl.from(".frame_end_jackpot", {duration:.5, opacity:0}, "-=.6")
-	tl.from(".frame_end_40", {duration:.5, opacity:0}, "-=.4")
-	
-	
+	tl.from(".frame_end_text", {duration:.5, opacity:0}, "-=.8")
+	tl.from(".frame_end_olg", {duration:.5, opacity:0}, "-=.6")	
 	tl.from(['#EF_cta'], 0.5, {opacity:0, y:"+=20'", onComplete:mouseover}, '+=.25');
 
 	// tl.play("test")
@@ -93,18 +104,30 @@ function start(data){
 
 function hand(){
 	var tl = new TimelineMax()	
-	const obj = size.w>size.h ? {y:`+=${size.h}`}: {x:`+=${size.w}`}
+	const obj = w/h>2 ? {y:`+=${size.h}`}: {x:`+=${size.w}`}
 
-	tl.from(".hand_1", {duration:.3, ...obj }, 0)
-	tl.from(".t2a", {duration:.4,  x:`-=${size.w}`}, 0)
-	tl.to(".t2a", {duration:.3, opacity:0, x:"+=100"}, `+=${READ.t2a}`)
+	tl.from([".hand_only", ".hand_1_screen"], {duration:.3, ...obj }, 0)
+	tl.from(".t2a",xyIn(), 0)
+	tl.add("t2a-out", `+=${READ.t2a}`)
+	tl.to(".t2a",xyOut(), "t2a-out")
+	
+	if(document.getElementById("hand_1_screen_text")){
+		tl.set(".hand_1_screen_text", {opacity:0 }, "t2a-out")
+		
+	}
+
+	if(universalBanner.size==="320x50"){
+		
+		tl.to([".hand_only", ".hand_1_screen"], {duration:.3, x:9 }, "t2a-out")	
+	}
 	
 	tl.add("t2-in")
-	tl.from(".t2b", {duration:.4, opacity:0, x:"-=100"}, "t2-in")
-	tl.from(".hand_2", {duration:.1, opacity:0 }, "t2-in")
+	tl.from(".t2b", xyIn(), "t2-in")
+	tl.from(".hand_2_screen", {duration:.1, opacity:0 }, "t2-in")
+
 
 	tl.add("t2", `+=${READ.t2b}`)
-	tl.to(".t2b", {duration:.45, opacity:0, ...obj}, "t2")
+	tl.to(".t2b", xyOut(), "t2")
 	tl.to(".hand", {duration:.35, opacity:0, ...obj}, "t2")
 	
 	return tl
@@ -119,9 +142,6 @@ function mouseover(e){
 	});
 }
 
-function logo1(){
-
-}
 
 function logo(){
 	const {manScale, olgY, ball_time, ball_ease} = data_
@@ -155,8 +175,12 @@ function scale({x, y}){
 }
 
 
+function start_320x50(){
 
-export {size, init, start, scale}
+}
+
+
+export {size, init, start, scale, start_320x50}
 
 
 
