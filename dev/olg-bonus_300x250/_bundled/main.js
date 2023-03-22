@@ -46,7 +46,11 @@ function xyIn() {
 
 function xyOut() {
 	var obj = { duration: .3, opacity: 0 };
-	obj[xy] = "+=100";
+	var dist = {
+		x: w, y: h
+	};
+	console.log();
+	obj[xy] = "+=" + dist[xy] * .8;
 	return obj;
 }
 
@@ -184,7 +188,7 @@ exports.start_320x50 = start_320x50;
 
 var _commonJsCommonJs = require('../../_common/js/common.js');
 
-gsap.set("#EF_cta", (0, _commonJsCommonJs.scale)({ x: 150, y: 154 }));
+gsap.set("#EF_cta", (0, _commonJsCommonJs.scale)({ x: 150, y: 173 }));
 
 (0, _commonJsCommonJs.start)();
 

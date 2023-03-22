@@ -42,7 +42,11 @@ function xyIn(){
 
 function xyOut(){
 	const obj = {duration:.3, opacity:0}
-	obj[xy] = "+=100"
+	const dist = {
+		x:w,y:h
+	}
+	console.log();
+	obj[xy] = `+=${dist[xy]*.8}`
 	return obj
 }
 
