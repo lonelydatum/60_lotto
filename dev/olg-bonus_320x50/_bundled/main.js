@@ -27,8 +27,8 @@ READ_ALL["olg-bonus"] = {
 
 READ_ALL["olg-dream"] = {
 	t1: 2.7,
-	t2a: 2,
-	t2b: 3.8
+	t2a: 1.7,
+	t2b: 2.1
 };
 
 var READ = READ_ALL[window.universalBanner.name];
