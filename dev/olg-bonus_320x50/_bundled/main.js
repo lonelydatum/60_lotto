@@ -25,6 +25,12 @@ READ_ALL["olg-bonus"] = {
 	t2b: 3.8
 };
 
+READ_ALL["olg-dream"] = {
+	t1: 2.7,
+	t2a: 2,
+	t2b: 3.8
+};
+
 var READ = READ_ALL[window.universalBanner.name];
 
 function init() {
@@ -58,13 +64,14 @@ var data_ = {};
 
 function start(data) {
 
-	data_ = _extends({ manScale: true, olgY: 80, ball_time: .5, ball_ease: 4.5 }, data);
+	data_ = _extends({ handShift: false, manScale: true, olgY: 80, ball_time: .5, ball_ease: 4.5 }, data);
 
 	var _data_ = data_;
 	var manScale = _data_.manScale;
 	var olgY = _data_.olgY;
 	var ball_time = _data_.ball_time;
 	var ball_ease = _data_.ball_ease;
+	var handShift = _data_.handShift;
 
 	var tl = init();
 
@@ -79,7 +86,7 @@ function start(data) {
 	tl.add("t1", "+=" + READ.t1);
 	tl.to([".t1", ".man"], { duration: .2, opacity: 0 }, "t1");
 
-	tl.add(hand(), "+=.3");
+	tl.add(hand(handShift), "+=.3");
 
 	var tlHideOLG = new TimelineMax();
 	tlHideOLG.set(['#triangleRed'], { attr: { points: "5.76 240.21 17.19 240.26 55.04 240.26 5.76 240.21" }, duration: 0.01, delay: 0 });
@@ -103,7 +110,8 @@ function start(data) {
 	// tl.play("test")
 }
 
-function hand() {
+function hand(handShift) {
+	console.log(handShift);
 	var tl = new TimelineMax();
 	var obj = w / h > 2 ? { y: "+=" + size.h } : { x: "+=" + size.w };
 
@@ -116,8 +124,7 @@ function hand() {
 		tl.set(".hand_1_screen_text", { opacity: 0 }, "t2a-out");
 	}
 
-	if (universalBanner.size === "320x50") {
-
+	if (handShift) {
 		tl.to([".hand_only", ".hand_1_screen"], { duration: .3, x: 9 }, "t2a-out");
 	}
 
@@ -190,7 +197,7 @@ var _commonJsCommonJs = require('../../_common/js/common.js');
 
 document.getElementById("man").className = "retina man";
 gsap.set("#EF_cta", (0, _commonJsCommonJs.scale)({ x: 270, y: 25 }));
-(0, _commonJsCommonJs.start)({ manScale: false, olgY: 70 });
+(0, _commonJsCommonJs.start)({ manScale: false, olgY: 70, handShift: true });
 
 module.exports = {};
 

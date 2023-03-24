@@ -18,6 +18,12 @@ READ_ALL["olg-bonus"] = {
 	t2b: 3.8,
 }
 
+READ_ALL["olg-dream"] = {
+	t1: 2.7,
+	t2a: 2,
+	t2b: 3.8,
+}
+
 const READ = READ_ALL[window.universalBanner.name]
 
 	
@@ -56,10 +62,10 @@ let data_ = {}
 
 function start(data){
 	
-	data_ = {manScale:true, olgY:80, ball_time:.5, ball_ease:4.5, ...data}
+	data_ = {handShift:false, manScale:true, olgY:80, ball_time:.5, ball_ease:4.5, ...data}
 
 	
-	const {manScale, olgY, ball_time, ball_ease} = data_
+	const {manScale, olgY, ball_time, ball_ease, handShift} = data_
 	
 	const tl = init()
 	
@@ -79,7 +85,7 @@ function start(data){
 
 	
 	
-	tl.add(hand(), "+=.3")
+	tl.add(hand(handShift), "+=.3")
 
 
 	const tlHideOLG = new TimelineMax()
@@ -106,7 +112,8 @@ function start(data){
 }
 
 
-function hand(){
+function hand(handShift){
+	console.log(handShift);
 	var tl = new TimelineMax()	
 	const obj = w/h>2 ? {y:`+=${size.h}`}: {x:`+=${size.w}`}
 
@@ -120,8 +127,7 @@ function hand(){
 		
 	}
 
-	if(universalBanner.size==="320x50"){
-		
+	if(handShift){		
 		tl.to([".hand_only", ".hand_1_screen"], {duration:.3, x:9 }, "t2a-out")	
 	}
 	
