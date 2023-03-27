@@ -1,4 +1,4 @@
-const banner = document.getElementById('banner')
+\const banner = document.getElementById('banner')
 const size = {w:banner.offsetWidth, h:banner.offsetHeight}
 const {w, h} = size
 
@@ -21,6 +21,12 @@ READ_ALL["olg-bonus"] = {
 READ_ALL["olg-dream"] = {
 	t1: 2.7,
 	t2a: 1.7,
+	t2b: 2.1,
+}
+
+READ_ALL["olg-draw"] = {
+	t1: 2.4,
+	t2a: 2.4,
 	t2b: 2.1,
 }
 

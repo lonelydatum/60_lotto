@@ -31,6 +31,12 @@ READ_ALL["olg-dream"] = {
 	t2b: 2.1
 };
 
+READ_ALL["olg-draw"] = {
+	t1: 2.5,
+	t2a: 2.2,
+	t2b: 2.1
+};
+
 var READ = READ_ALL[window.universalBanner.name];
 
 function init() {
