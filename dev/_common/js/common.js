@@ -1,4 +1,4 @@
-\const banner = document.getElementById('banner')
+const banner = document.getElementById('banner')
 const size = {w:banner.offsetWidth, h:banner.offsetHeight}
 const {w, h} = size
 
@@ -30,6 +30,12 @@ READ_ALL["olg-draw"] = {
 	t2b: 2.1,
 }
 
+READ_ALL["olg-win"] = {
+	t1: 2.8,
+	t2a: 2.4,
+	t2b: 2.6,
+}
+
 const READ = READ_ALL[window.universalBanner.name]
 
 	
@@ -57,7 +63,7 @@ function xyOut(){
 	const dist = {
 		x:w,y:h
 	}
-	console.log();
+	
 	obj[xy] = `+=${dist[xy]*.8}`
 	return obj
 }
@@ -119,7 +125,7 @@ function start(data){
 
 
 function hand(handShift){
-	console.log(handShift);
+	
 	var tl = new TimelineMax()	
 	const obj = w/h>2 ? {y:`+=${size.h}`}: {x:`+=${size.w}`}
 
