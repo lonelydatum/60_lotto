@@ -12,6 +12,11 @@ const xy = w/h>2?"y":"x"
 
 
 const READ_ALL = {}
+READ_ALL["olg-bonus10"] = {
+	t1: 2,
+	t2a: 3,
+	t2b: 4,
+}
 READ_ALL["olg-bonus"] = {
 	t1: 2,
 	t2a: 3,
@@ -86,6 +91,7 @@ function start(data){
 		gsap.from(".man", {scale:.55, duration:5})	
 	}
 	
+	console.log(handShift);
 
 	
 
